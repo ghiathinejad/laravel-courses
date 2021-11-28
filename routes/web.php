@@ -16,3 +16,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/articles',function () {
+    return "Articles lists!!!!!";
+});
+
+Route::get('/article/{id}/{name}' , function ($id,$name){
+    return 'article'.$id.':'.$name;
+});
+
+Route::prefix('admin')->group(function (){
+    Route::get('/',function () {
+        return "admin panel";
+    });
+
+    Route::get('/users',function () {
+        return "admin users";
+    });
+
+    Route::get('/articles',function () {
+        return "admin articles";
+    });
+});
