@@ -38,3 +38,10 @@ Route::prefix('admin')->group(function (){
         return "admin articles";
     });
 });
+
+
+Route::get('/hello/{name}', function ($name) {
+    return view('index',[
+        'username' => $name
+    ]);
+});
