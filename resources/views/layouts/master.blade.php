@@ -15,13 +15,14 @@
 
     <!-- Custom styles for this template -->
     <link href="/css/blog-home.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
 
 </head>
 
 <body>
 
 <!-- Navigation -->
-@include('layout.header')
+@include('layouts.header')
 
 <!-- Page Content -->
 <div class="container">
@@ -36,7 +37,7 @@
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
             @section('sidebar')
-                @include('layout.sidebar')
+                @include('layouts.sidebar')
             @show
         </div>
     </div>
@@ -46,7 +47,7 @@
 <!-- /.container -->
 
 <!-- Footer -->
-@include('layout.footer')
+@include('layouts.footer')
 
 <!-- Bootstrap core JavaScript -->
 <script src="/vendor/jquery/jquery.min.js"></script>
