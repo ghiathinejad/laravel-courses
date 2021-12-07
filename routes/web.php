@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $articles = DB::table('article')->get();
+    dd($articles);
     return view('welcome');
 });
 
