@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $articles = DB::table('article')->get();
+/*    $articles = DB::table('articles')->get();
+    dd($articles);*/
+/*    $articles = \App\Article::all();
+    dd($articles);*/
+    $articles = \App\Article::orderBy('id')->get();
     dd($articles);
     return view('welcome');
 });
@@ -46,4 +50,9 @@ Route::get('/hello/{name}', function ($name) {
     return view('index',[
         'username' => $name
     ]);
+});
+
+
+Route::get('/articles/seed',function () {
+    factory(\App\Article::class,10)->create();
 });
