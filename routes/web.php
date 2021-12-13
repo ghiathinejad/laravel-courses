@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Article;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,7 @@ Route::get('/article/{id}/{name}' , function ($id,$name){
     return 'article'.$id.':'.$name;
 });
 
-Route::prefix('admin')->group(function (){
+/*Route::prefix('admin')->group(function (){
     Route::get('/',function () {
         return "admin panel";
     });
@@ -43,7 +44,7 @@ Route::prefix('admin')->group(function (){
     Route::get('/articles',function () {
         return "admin articles";
     });
-});
+});*/
 
 
 Route::get('/hello/{name}', function ($name) {
@@ -55,4 +56,56 @@ Route::get('/hello/{name}', function ($name) {
 
 Route::get('/articles/seed',function () {
     factory(\App\Article::class,10)->create();
+});
+
+Route::prefix('admin/article')->group(function (){
+    Route::get('/create',function (){
+       return view('admin.article.create') ;
+    });
+
+    Route::post('/create',function (){
+
+/*        $validation = Validator::make(request()->all(),[
+            'title'=> 'required|min:4|max:6',
+            'body'=> 'required',
+        ]);
+
+        if($validation->fails()){
+            return redirect()
+                ->back()
+                ->withErrors($validation);
+        }*/
+
+/*        Validator::make(request()->all(),[
+            'title'=> 'required|min:4|max:6',
+            'body'=> 'required',
+        ])->validate();
+
+        Article::create([
+            'title' => request('title'),
+            'slug_fa' => request('title'),
+            'body' => request('body')
+        ]);*/
+
+
+        $validateData = Validator::make(request()->all(),[
+            'title'=> 'required|min:4|max:6',
+            'body'=> 'required',
+        ],[
+            'title.required' => 'فیلد مقدار را وارد کنید'
+        ])->validated();
+
+        Article::create([
+            'title' => $validateData['title'],
+            'slug_fa' => $validateData['title'],
+            'body' => $validateData['body']
+        ]);
+
+        return redirect('/admin/article/create');
+    });
+
+    Route::get('/edit/{id}',function ($id){
+        $article = Article::find($id);
+        return view('admin.article.edit' , ['article' => $article]) ;
+    });
 });
