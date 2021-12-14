@@ -105,7 +105,27 @@ Route::prefix('admin/article')->group(function (){
     });
 
     Route::get('/edit/{id}',function ($id){
-        $article = Article::find($id);
+        $article = Article::findOrFail($id);
         return view('admin.article.edit' , ['article' => $article]) ;
+    });
+
+    Route::put('/edit/{id}',function ($id){
+
+
+        $validateData = Validator::make(request()->all(),[
+            'title'=> 'required|min:4|max:6',
+            'body'=> 'required',
+        ])->validated();
+
+
+        $article = Article::findOrFail($id);
+/*        $article->update([
+            'title' => $validateData['title'],
+            'slug_fa' => $validateData['title'],
+            'body' => $validateData['body']
+        ]);*/
+
+        $article->update($validateData);
+        return back();
     });
 });
