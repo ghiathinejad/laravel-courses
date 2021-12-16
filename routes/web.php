@@ -59,6 +59,21 @@ Route::get('/articles/seed',function () {
 });
 
 Route::prefix('admin/article')->group(function (){
+
+    Route::delete('/delete/{id}',function ($id){
+        $article = Article::findOrFail($id);
+
+        $article->delete();
+        return back();
+
+    });
+
+    Route::get('/list',function (){
+        return view('admin.article.list',[
+            'articles' => Article::all()
+        ]) ;
+    });
+
     Route::get('/create',function (){
        return view('admin.article.create') ;
     });
