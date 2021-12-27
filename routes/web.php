@@ -20,7 +20,7 @@ Route::get('/', function () {
 /*    $articles = \App\Article::all();
     dd($articles);*/
     $articles = \App\Article::orderBy('id')->get();
-    dd($articles);
+    //dd($articles);
     return view('welcome');
 });
 
@@ -61,15 +61,11 @@ Route::get('/articles/seed',function () {
 });
 
 Route::prefix('admin/article')->namespace('Admin')->group(function (){
-
+    //Route::delete('/delete/{id}','Admin\ArticleController@delete');
     Route::delete('/delete/{id}','ArticleController@delete');
     Route::get('/list','ArticleController@list');
-
     Route::get('/create','ArticleController@create');
-
     Route::post('/create','ArticleController@save');
-
     Route::get('/edit/{id}','ArticleController@edit');
-
     Route::put('/edit/{id}','ArticleController@update');
 });

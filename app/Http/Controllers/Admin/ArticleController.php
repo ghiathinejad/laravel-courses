@@ -76,10 +76,15 @@ class ArticleController extends Controller
 
     function update($id){
 
-        $validateData = Validator::make(request()->all(),[
+/*        $validateData = Validator::make(request()->all(),[
             'title'=> 'required|min:4|max:6',
             'body'=> 'required',
-        ])->validated();
+        ])->validated();*/
+
+        $validateData = $this->validate(request(),[
+            'title'=> 'required|min:4|max:6',
+            'body'=> 'required',
+        ]);
 
 
         $article = Article::findOrFail($id);
