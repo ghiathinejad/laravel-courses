@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Article;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -74,17 +75,19 @@ class ArticleController extends Controller
         return view('admin.article.edit' , ['article' => $article]) ;
     }
 
-    function update($id){
+    function update(ArticleRequest $request,$id){
 
 /*        $validateData = Validator::make(request()->all(),[
             'title'=> 'required|min:4|max:6',
             'body'=> 'required',
         ])->validated();*/
 
-        $validateData = $this->validate(request(),[
+/*        $validateData = $this->validate(request(),[
             'title'=> 'required|min:4|max:6',
             'body'=> 'required',
-        ]);
+        ]);*/
+
+        $validateData = $request->validated();
 
 
         $article = Article::findOrFail($id);
