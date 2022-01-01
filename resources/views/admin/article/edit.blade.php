@@ -12,7 +12,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="/admin/article/edit/{{$article->id}}" method="post">
+            <form action="/admin/article/{{$article->id}}" method="post">
                 @csrf
                 @method('put')
                 <div class="form-group">

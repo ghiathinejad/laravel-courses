@@ -20,10 +20,15 @@
                                 <td>{{ $art['title'] }}</td>
                                 <td>{{ $art['body'] }}</td>
                                 <td>
-                                    <form action="/admin/article/delete/{{ $art['id'] }}" method="post">
+                                    <form action="/admin/article/{{ $art['id'] }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger" >delete</button>
+                                    </form>
+
+                                    <form action="/admin/article/{{ $art['id'] }}/edit" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-warning" >edit</button>
                                     </form>
                                 </td>
                             </tr>

@@ -6,98 +6,89 @@ use App\Article;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
-    //
-    public function list(){
-        return view('admin.article.list',[
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('admin.article.list' , [
             'articles' => Article::all()
-        ]) ;
+        ]);
     }
 
-    public function delete($id){
-        $article = Article::findOrFail($id);
-
-        $article->delete();
-        return back();
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.article.create');
     }
 
-    function create(){
-        return view('admin.article.create') ;
-    }
-
-    function save(){
-
-        /*        $validation = Validator::make(request()->all(),[
-                    'title'=> 'required|min:4|max:6',
-                    'body'=> 'required',
-                ]);
-
-                if($validation->fails()){
-                    return redirect()
-                        ->back()
-                        ->withErrors($validation);
-                }*/
-
-        /*        Validator::make(request()->all(),[
-                    'title'=> 'required|min:4|max:6',
-                    'body'=> 'required',
-                ])->validate();
-
-                Article::create([
-                    'title' => request('title'),
-                    'slug_fa' => request('title'),
-                    'body' => request('body')
-                ]);*/
-
-
-        $validateData = Validator::make(request()->all(),[
-            'title'=> 'required|min:4|max:6',
-            'body'=> 'required',
-        ],[
-            'title.required' => 'فیلد مقدار را وارد کنید'
-        ])->validated();
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ArticleRequest $request)
+    {
+        $validate_data = $request->validated();
 
         Article::create([
-            'title' => $validateData['title'],
-            'slug_fa' => $validateData['title'],
-            'body' => $validateData['body']
+            'title' => $validate_data['title'],
+            'slug_fa' => $validate_data['title'],
+            'body' => $validate_data['body'],
         ]);
 
-        return redirect('/admin/article/create');
+        return redirect('/admin/article');
     }
 
-    function edit(Article $article){
-        //$article = Article::findOrFail($id);
-        return view('admin.article.edit' , ['article' => $article]) ;
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Article $article)
+    {
+        return view('admin.article.edit' , [
+            'article' => $article
+        ]);
     }
 
-    function update(ArticleRequest $request,$id){
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(ArticleRequest $request, Article $article)
+    {
+        $validate_data = $request->validated();
 
-/*        $validateData = Validator::make(request()->all(),[
-            'title'=> 'required|min:4|max:6',
-            'body'=> 'required',
-        ])->validated();*/
+        $article->update($validate_data);
 
-/*        $validateData = $this->validate(request(),[
-            'title'=> 'required|min:4|max:6',
-            'body'=> 'required',
-        ]);*/
+        return back();
+    }
 
-        $validateData = $request->validated();
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Article $article)
+    {
+        $article->delete();
 
-
-        $article = Article::findOrFail($id);
-        /*        $article->update([
-                    'title' => $validateData['title'],
-                    'slug_fa' => $validateData['title'],
-                    'body' => $validateData['body']
-                ]);*/
-
-        $article->update($validateData);
         return back();
     }
 }
