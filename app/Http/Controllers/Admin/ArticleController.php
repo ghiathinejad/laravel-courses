@@ -70,8 +70,8 @@ class ArticleController extends Controller
         return redirect('/admin/article/create');
     }
 
-    function edit($id){
-        $article = Article::findOrFail($id);
+    function edit(Article $article){
+        //$article = Article::findOrFail($id);
         return view('admin.article.edit' , ['article' => $article]) ;
     }
 

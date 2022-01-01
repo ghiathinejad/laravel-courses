@@ -66,6 +66,8 @@ Route::prefix('admin/article')->namespace('Admin')->group(function (){
     Route::get('/list','ArticleController@list');
     Route::get('/create','ArticleController@create');
     Route::post('/create','ArticleController@save');
-    Route::get('/edit/{id}','ArticleController@edit');
+    //Route::get('/edit/{id}','ArticleController@edit');
+    //Route::get('/edit/{article}','ArticleController@edit');
+    Route::get('/edit/{articleSlug}','ArticleController@edit');
     Route::put('/edit/{id}','ArticleController@update');
 });
