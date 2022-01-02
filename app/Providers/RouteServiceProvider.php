@@ -34,9 +34,9 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
-/*        Route::bind('articleSlug',function ($slug){
-            return Article::where('slug_fa' , $slug)->first();
-        });*/
+        Route::bind('articleSlug',function ($slug){
+            return Article::where('slug_fa' , $slug)->firstOrFail();
+        });
     }
 
     /**

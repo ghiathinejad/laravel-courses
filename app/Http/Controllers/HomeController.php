@@ -9,7 +9,6 @@ class HomeController extends Controller
     //
     public function home(){
         $articles = \App\Article::orderBy('id')->get();
-        dd($articles);
-        return view('welcome');
+        return view('index' , compact('articles'));
     }
 }

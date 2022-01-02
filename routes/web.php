@@ -30,9 +30,7 @@ Route::get('/articles',function () {
     return "Articles lists!!!!!";
 });
 
-Route::get('/article/{id}/{name}' , function ($id,$name){
-    return 'article'.$id.':'.$name;
-});
+Route::get('/article/{articleSlug}' , 'ArticleController@single');
 
 /*Route::prefix('admin')->group(function (){
     Route::get('/',function () {

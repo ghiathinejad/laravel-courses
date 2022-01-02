@@ -25,11 +25,6 @@
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger" >delete</button>
                                     </form>
-
-                                    <form action="/admin/article/{{ $art['id'] }}/edit" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn btn-warning" >edit</button>
-                                    </form>
                                 </td>
                             </tr>
                         @endforeach
