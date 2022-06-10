@@ -43,7 +43,6 @@ class ArticleController extends Controller
 
         Article::create([
             'title' => $validate_data['title'],
-            'slug_fa' => $validate_data['title'],
             'body' => $validate_data['body'],
         ]);
 
@@ -91,4 +90,6 @@ class ArticleController extends Controller
 
         return back();
     }
+
+
 }

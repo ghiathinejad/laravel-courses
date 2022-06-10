@@ -59,7 +59,7 @@ Route::get('/articles/seed',function () {
 });
 
 Route::prefix('admin')->namespace('Admin')->group(function (){
-/*    //Route::delete('/delete/{id}','Admin\ArticleController@delete');
+    //Route::delete('/delete/{id}','Admin\ArticleController@delete');
     Route::delete('/delete/{id}','ArticleController@delete');
     Route::get('/list','ArticleController@list');
     Route::get('/create','ArticleController@create');
@@ -67,7 +67,7 @@ Route::prefix('admin')->namespace('Admin')->group(function (){
     //Route::get('/edit/{id}','ArticleController@edit');
     //Route::get('/edit/{article}','ArticleController@edit');
     Route::get('/edit/{articleSlug}','ArticleController@edit');
-    Route::put('/edit/{id}','ArticleController@update');*/
+    Route::put('/edit/{id}','ArticleController@update');
     Route::resource('article','ArticleController')->except(['show']);
     //Route::resource('article','ArticleController')->only(['index','edit']);
 });

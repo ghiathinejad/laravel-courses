@@ -16,7 +16,7 @@ class TestMiddleware
     public function handle($request, Closure $next)
     {
         if($request->input('title')){
-            dd(123);
+            //dd(123);
         }
         return $next($request);
     }
