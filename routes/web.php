@@ -71,3 +71,6 @@ Route::prefix('admin')->namespace('Admin')->group(function (){
     Route::resource('article','ArticleController')->except(['show']);
     //Route::resource('article','ArticleController')->only(['index','edit']);
 });
+
+
+Route::get('/mail/send' , 'SendMailController@sendMail');
