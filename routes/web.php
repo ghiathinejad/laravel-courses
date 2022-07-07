@@ -78,3 +78,7 @@ Route::get('/mail/send' , 'SendMailController@sendMail');
 Route::get('/session/create' , 'SessionController@create');
 Route::get('/session/view' , 'SessionController@view');
 Route::get('/session/delete' , 'SessionController@delete');
+
+Route::get('/cookie/create' , 'CookieController@create');
+Route::get('/cookie/view' , 'CookieController@view');
+Route::get('/cookie/delete' , 'CookieController@delete');
