@@ -74,3 +74,7 @@ Route::prefix('admin')->namespace('Admin')->group(function (){
 
 
 Route::get('/mail/send' , 'SendMailController@sendMail');
+
+Route::get('/session/create' , 'SessionController@create');
+Route::get('/session/view' , 'SessionController@view');
+Route::get('/session/delete' , 'SessionController@delete');
