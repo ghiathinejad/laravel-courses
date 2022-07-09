@@ -25,6 +25,7 @@
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger" >delete</button>
                                     </form>
+                                    <a href="/admin/edit/{{ $art['slug_fa'] }}" class="btn btn-danger" >edit</a>
                                 </td>
                             </tr>
                         @endforeach

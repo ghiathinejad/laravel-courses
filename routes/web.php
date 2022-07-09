@@ -61,12 +61,12 @@ Route::get('/articles/seed',function () {
 Route::prefix('admin')->namespace('Admin')->group(function (){
     //Route::delete('/delete/{id}','Admin\ArticleController@delete');
     Route::delete('/delete/{id}','ArticleController@delete');
-    Route::get('/list','ArticleController@list');
+    Route::get('/list','ArticleController@index');
     Route::get('/create','ArticleController@create');
     Route::post('/create','ArticleController@save');
     //Route::get('/edit/{id}','ArticleController@edit');
     //Route::get('/edit/{article}','ArticleController@edit');
-    Route::get('/edit/{articleSlug}','ArticleController@edit');
+    Route::get('/edit/{articleSlug}','ArticleController@edit')->middleware('auth');
     Route::put('/edit/{id}','ArticleController@update');
     Route::resource('article','ArticleController')->except(['show']);
     //Route::resource('article','ArticleController')->only(['index','edit']);
@@ -82,3 +82,7 @@ Route::get('/session/delete' , 'SessionController@delete');
 Route::get('/cookie/create' , 'CookieController@create');
 Route::get('/cookie/view' , 'CookieController@view');
 Route::get('/cookie/delete' , 'CookieController@delete');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
