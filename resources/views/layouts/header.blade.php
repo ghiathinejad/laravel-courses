@@ -20,6 +20,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contact</a>
                 </li>
+                @if(auth()->check())
+                    <li class="nav-item">
+                        <a href="{{route('articleList')}}" class="btn btn-info">artclie list</a>
+                    </li>
+                    <li>
+                        <form action="{{route('logout')}}" method="post">
+                            @csrf
+                            <button class="btn btn-danger">logout</button>
+                        </form>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{route('login')}}" class="btn btn-info">login</a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>
