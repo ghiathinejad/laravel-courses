@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Article::class, function (Faker $faker) {
     return [
         'title' => $faker->text(50),
-        'slug' => $faker->slug(),
+        'slug_fa' => $faker->slug(),
         'body' => $faker->paragraph(rand(5,20)),
         'created_at' => now(),
         'updated_at' => now()

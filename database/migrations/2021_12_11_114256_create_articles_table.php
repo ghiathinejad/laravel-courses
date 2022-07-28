@@ -15,8 +15,10 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            //$table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('title',50);
-            $table->string('slug');
+            $table->string('slug_fa');
             $table->text('body');
             $table->timestamps();
         });

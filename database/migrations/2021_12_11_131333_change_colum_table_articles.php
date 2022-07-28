@@ -15,7 +15,7 @@ class ChangeColumTableArticles extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             $table->string('title',150)->change();
-            $table->renameColumn('slug','slug_fa');
+            //$table->renameColumn('slug','slug_fa');
         });
     }
 

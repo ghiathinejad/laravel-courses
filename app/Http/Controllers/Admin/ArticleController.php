@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    function __construct(){
+        $this->middleware('auth')->except(['index']);
+    }
     /**
      * Display a listing of the resource.
      *
