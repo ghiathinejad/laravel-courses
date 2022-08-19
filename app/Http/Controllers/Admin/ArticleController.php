@@ -14,27 +14,40 @@ class ArticleController extends Controller
     function __construct(){
         $this->middleware('auth')->except(['index']);
     }
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $cat = Category::find(2);
-        return $cat->articles()->get();
-
-        $article = Article::find(1);
-        return $article->categories()->get();
-
-        $user = User::find(5);
-        return $user->articles()->get();
-
-        $article = Article::find(6);
-        return $article->user()->first(); //return $article->user;
+//        $cat = Category::find(2);
+//        return $cat->articles()->get();
+//
+//        $article = Article::find(1);
+//        return $article->categories()->get();
+//
+//        $user = User::find(5);
+//        return $user->articles()->get();
+//
+//        $article = Article::find(6);
+//        return $article->user()->first(); //return $article->user;
 
         return view('admin.article.list' , [
             'articles' => Article::all()
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function show($id){
+        $article = Article::find($id);
+        //$article->categories()->attach([4,5]);
+        $article->categories()->detach([4,2]);
+
+        return view('admin.article.show' , [
+            'article' => Article::find($id)
         ]);
     }
 
@@ -64,19 +77,20 @@ class ArticleController extends Controller
             'user_id' => auth()->user()->id,
         ]);*/
 
-        auth()->user()->articles()->create([
+        $articles = auth()->user()->articles()->create([
             'title' => $validate_data['title'],
             'body' => $validate_data['body']
         ]);
+
+        //$articles->categories()->attach($request->input('categories'));
+        $articles->categories()->attach($validate_data['categories']);
 
         return redirect('/admin/article');
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Article $article
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Article $article)
     {
@@ -97,6 +111,9 @@ class ArticleController extends Controller
         $validate_data = $request->validated();
 
         $article->update($validate_data);
+
+        $article->categories()->detach();
+        $article->categories()->sync($validate_data['categories']);
 
         return back();
     }

@@ -70,6 +70,7 @@ Route::prefix('admin')->namespace('Admin')->group(function (){
     Route::put('/edit/{id}','ArticleController@update');
     Route::resource('article','ArticleController')->except(['show']);
     //Route::resource('article','ArticleController')->only(['index','edit']);
+    Route::get('/show/{id}','ArticleController@show');
 });
 
 

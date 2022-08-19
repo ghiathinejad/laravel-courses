@@ -18,7 +18,14 @@
                             <tr>
                                 <td>{{ $art['id'] }}</td>
                                 <td>{{ $art['title'] }}</td>
-                                <td>{{ $art['body'] }}</td>
+                                <td>
+                                    {{ $art['body'] }}
+                                    <ul>
+                                    @foreach($art->categories()->get() as $cat)
+                                        <li>{{$cat['name']}}</li>
+                                    @endforeach
+                                    </ul>
+                                </td>
                                 <td>
                                     <form action="/admin/article/{{ $art['id'] }}" method="post">
                                         @csrf
