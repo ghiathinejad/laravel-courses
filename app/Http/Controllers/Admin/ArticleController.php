@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Article;
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\User;
@@ -20,6 +21,12 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        $cat = Category::find(2);
+        return $cat->articles()->get();
+
+        $article = Article::find(1);
+        return $article->categories()->get();
+
         $user = User::find(5);
         return $user->articles()->get();
 
