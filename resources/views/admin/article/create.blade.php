@@ -18,6 +18,14 @@
                     <label for="title">title: </label><input name="title" type="text" class="form-control">
                 </div>
                 <div class="form-group">
+                    <label for="category">category: </label>
+                    <select name="categories[]" class="form-control" multiple>
+                        @foreach(\App\Category::all() as $cat)
+                            <option value="{{$cat->id}}">{{$cat->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="body">body: </label><textarea name="body" class="form-control"></textarea>
                 </div>
                 <div class="form-group">

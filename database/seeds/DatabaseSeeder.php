@@ -21,5 +21,8 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             ArticleTableSeeder::class
         ]);*/
+        $this->call([
+            CategoryTableSeeder::class
+        ]);
     }
 }
