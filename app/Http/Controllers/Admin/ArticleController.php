@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Article;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
+use App\User;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -19,6 +20,12 @@ class ArticleController extends Controller
      */
     public function index()
     {
+        $user = User::find(5);
+        return $user->articles()->get();
+
+        $article = Article::find(6);
+        return $article->user()->first(); //return $article->user;
+
         return view('admin.article.list' , [
             'articles' => Article::all()
         ]);
@@ -44,9 +51,15 @@ class ArticleController extends Controller
     {
         $validate_data = $request->validated();
 
-        Article::create([
+/*        Article::create([
             'title' => $validate_data['title'],
             'body' => $validate_data['body'],
+            'user_id' => auth()->user()->id,
+        ]);*/
+
+        auth()->user()->articles()->create([
+            'title' => $validate_data['title'],
+            'body' => $validate_data['body']
         ]);
 
         return redirect('/admin/article');

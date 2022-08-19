@@ -11,6 +11,7 @@ $factory->define(Article::class, function (Faker $faker) {
         'slug_fa' => $faker->slug(),
         'body' => $faker->paragraph(rand(5,20)),
         'created_at' => now(),
-        'updated_at' => now()
+        'updated_at' => now(),
+        'user_id' => 5
     ];
 });

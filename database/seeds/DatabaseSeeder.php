@@ -1,5 +1,7 @@
 <?php
 
+use App\Article;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,10 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        factory(User::class,10)->create()->each(function ($user){
+            $user->articles()->saveMany(factory(Article::class,rand(1,6))->make());
+        });
         // $this->call(UserSeeder::class);
-        $this->call([
-            ArticleTableSeeder::class,
-            UserTableSeeder::class
-        ]);
+/*        $this->call([
+            UserTableSeeder::class,
+            ArticleTableSeeder::class
+        ]);*/
     }
 }

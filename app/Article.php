@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use Sluggable;
-    protected $fillable = ['title','slug_fa','body'];
+    protected $fillable = ['title','slug_fa','body','user_id'];
     //
 /*    public function getRouteKeyName()
     {
